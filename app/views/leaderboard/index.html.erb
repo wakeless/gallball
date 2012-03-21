@@ -1,0 +1,9 @@
+<h1>Leaderboard</h1>
+<ol>
+<% @leaders.each do |leader| %>
+  <li><%= leader.name %> <%= leader.percentage %> (games: <--%= leader.games %-->)</li>
+<% end %>
+</ol>
+
+<%= link_to "New Game", new_game_path, :class => "btn btn-primary" %>
+<%= link_to "New Player", new_player_path, :class => "btn btn-primary" %>

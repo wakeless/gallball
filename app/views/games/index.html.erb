@@ -1,0 +1,15 @@
+<h1>Listing games</h1>
+<% @games.each do |game| %>
+  <tr>
+    <td><%= game.winner.name %></td>
+    <td><%= game.loser.name %></td>
+    <td><%= link_to 'Show', game %></td>
+    <td><%= link_to 'Edit', edit_game_path(game) %></td>
+    <td><%= link_to 'Destroy', game, confirm: 'Are you sure?', method: :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Game', new_game_path %>

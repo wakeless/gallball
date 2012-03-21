@@ -1,0 +1,5 @@
+<%= simple_form_for(@game) do |f| %>
+  <%= f.input :winner_id, :as => :select, :collection => Player.all %>
+  <%= f.input :loser_id, :as => :select, :collection => Player.all %>
+  <%= f.submit "Save" %>
+<% end %>
