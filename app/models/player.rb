@@ -9,7 +9,7 @@ class Player < ActiveRecord::Base
   end
 
   def self.leaderboard
-    select("(select count(*) from games where winner_id = players.id) / (select count(*) from games where loser_id = players.id or winner_id = players.id) as percentage").select("players.*").joins(:losses).uniq
+    select("(select count(*) from games where winner_id = players.id) / (select count(*) from games where loser_id = players.id or winner_id = players.id) as percentage").select("players.*").joins("INNER JOIN games on games.winner_id = players.id or games.loser_id = players.id").uniq
 
   end
 end
