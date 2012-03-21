@@ -3,11 +3,20 @@ source 'https://rubygems.org'
 gem 'rails', '3.2.2'
 gem "simple_form"
 
+gem 'twitter-bootstrap-rails', :git => "git://github.com/seyhunak/twitter-bootstrap-rails.git" 
+gem 'jquery-rails'
+
+
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
 group :development do
   gem 'sqlite3'
+end
+
+group :test do
+  gem "rspec"
+  gem "factory_girl"
 end
 
 
@@ -25,4 +34,3 @@ end
 
 gem "pg"
 
-gem 'jquery-rails'
