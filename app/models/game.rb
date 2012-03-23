@@ -12,6 +12,6 @@ class Game < ActiveRecord::Base
   end
 
   def to_s
-    "#{winner.name} beat #{loser.name}"
+    "#{winner.name} beat #{loser.name} at #{sport.name}"
   end
 end
