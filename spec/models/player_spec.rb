@@ -1,5 +1,8 @@
 require 'spec_helper'
 
 describe Player do
-  pending "add some examples to (or delete) #{__FILE__}"
+  it { should have_many(:games) } #failing
+  it { should have_many(:losses) }
+  it { should have_many(:wins) }
+  it { should validate_presence_of(:name).with_message("People have names, yo") }
 end

@@ -17,7 +17,9 @@ end
 group :test do
   gem "rspec-rails"
   gem "factory_girl"
-  gem "shoulda"
+  gem "shoulda", "~> 3.0.0"
+  gem "autotest"
+  gem "autotest-rails"
 end
 
 

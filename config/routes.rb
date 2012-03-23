@@ -1,4 +1,6 @@
 Gallball::Application.routes.draw do
+  resources :sports
+
   resources :games
 
   resources :players

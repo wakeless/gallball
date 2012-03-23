@@ -4,6 +4,8 @@ class Player < ActiveRecord::Base
 
   has_many :games, :finder_sql => Proc.new { "SELECT * FROM games WHERE winner_id = #{id} or loser_id = #{id} ORDER BY created_at desc" }
 
+  validates_presence_of :name, message: "People have names, yo"
+
   def percentage
     wins.length.to_f / games.length * 100
   end
