@@ -7,4 +7,8 @@ describe Game do
   it { should validate_presence_of(:sport).with_message("When you play nothing, there is no winner or loser") }
   it { should validate_presence_of(:winner).with_message("Even life has a winner") }
   it { should validate_presence_of(:loser).with_message("Without losers, there can be no winners") }
+  
+  describe "#update_ranks" do
+    
+  end
 end

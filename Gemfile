@@ -6,6 +6,7 @@ gem "simple_form"
 gem 'twitter-bootstrap-rails', :git => "git://github.com/seyhunak/twitter-bootstrap-rails.git" 
 gem 'jquery-rails'
 
+gem 'elo'
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
@@ -13,10 +14,11 @@ gem 'jquery-rails'
 group :development, :test do
   gem 'sqlite3'
   gem "rspec-rails"
+  gem "database_cleaner"
 end
 
 group :test do
-  gem "factory_girl"
+  gem "factory_girl_rails", "~> 2.0"
   gem "shoulda", "~> 3.0.0"
   gem "autotest"
   gem "autotest-rails"
