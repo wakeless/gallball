@@ -10,12 +10,12 @@ gem 'jquery-rails'
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
-group :development do
+group :development, :test do
   gem 'sqlite3'
+  gem "rspec-rails"
 end
 
 group :test do
-  gem "rspec-rails"
   gem "factory_girl"
   gem "shoulda", "~> 3.0.0"
   gem "autotest"
