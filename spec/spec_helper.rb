@@ -36,11 +36,11 @@ RSpec.configure do |config|
   end
 
   config.before(:each) do
+    DatabaseCleaner.clean
     DatabaseCleaner.start
   end
 
   config.after(:each) do
-    DatabaseCleaner.clean
   end
   
 end

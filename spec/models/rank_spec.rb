@@ -10,8 +10,8 @@ describe Rank do
   describe "#for_sport" do 
     let (:tennis) { FactoryGirl.create(:sport, :name => 'Tennis') }
     before {
-      rank9Ball = FactoryGirl.create(:rank)
-      rankTennis = FactoryGirl.create(:rank, :sport => tennis)
+      FactoryGirl.create(:rank)
+      FactoryGirl.create(:rank, :sport => tennis)
     }
     
     it {
@@ -23,5 +23,20 @@ describe Rank do
       Rank.for_sport(tennis).length.should == 1
     }
     
+  end
+  
+  describe "#current_rank" do
+    before {
+      player1 = FactoryGirl.create(:player)
+      player2 = FactoryGirl.create(:player)
+      
+      FactoryGirl.create(:rank, :player => player1)
+      FactoryGirl.create(:rank, :player => player1)
+      FactoryGirl.create(:rank, :player => player2)
+      FactoryGirl.create(:rank, :player => player2)
+    }
+    
+    it { Rank.all().length.should == 4 }
+    it { Rank.current_ranks.length.should == 2 }
   end
 end

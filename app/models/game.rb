@@ -16,5 +16,24 @@ class Game < ActiveRecord::Base
     "#{winner.name} beat #{loser.name} at #{sport.name}"
   end
   
+  def self.games_played(player)
+    self.for_player(player).length
+  end
+  
+  def self.for_player(player)
+    where("winner_id = :player OR loser_id = :player", {:player => player})
+  end
+  
+  def update_player_rank
+    eloWinner = Elo::Player.new(:rating => self.winner.rank_for_sport(sport), :games_played => winner.games_played)
+    eloLoser = Elo::Player.new(:rating => self.loser.rank_for_sport(sport), :games_played => loser.games_played)
+    
+    game = eloWinner.wins_from(eloLoser)
+    
+    winner.update_rank(sport, eloWinner.rating)
+    loser.update_rank(sport, eloLoser.rating)
+  end
+  
+  after_save :update_player_rank
   
 end

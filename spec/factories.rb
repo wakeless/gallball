@@ -12,4 +12,10 @@ FactoryGirl.define do
     sport { FactoryGirl.create(:sport) }
     value 1000
   end
+  
+  factory :game do
+    winner { FactoryGirl.create(:player) }
+    loser { FactoryGirl.create(:player) }
+    sport { FactoryGirl.create(:sport) }
+  end
 end
