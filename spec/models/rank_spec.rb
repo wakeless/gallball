@@ -29,11 +29,12 @@ describe Rank do
     before {
       player1 = FactoryGirl.create(:player)
       player2 = FactoryGirl.create(:player)
+      sport1 = FactoryGirl.create :sport
       
-      FactoryGirl.create(:rank, :player => player1)
-      FactoryGirl.create(:rank, :player => player1)
-      FactoryGirl.create(:rank, :player => player2)
-      FactoryGirl.create(:rank, :player => player2)
+      FactoryGirl.create(:rank, :player => player1, :sport => sport1)
+      FactoryGirl.create(:rank, :player => player1, :sport => sport1)
+      FactoryGirl.create(:rank, :player => player2, :sport => sport1)
+      FactoryGirl.create(:rank, :player => player2, :sport => sport1)
     }
     
     it { Rank.all().length.should == 4 }
