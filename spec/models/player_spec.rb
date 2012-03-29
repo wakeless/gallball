@@ -14,26 +14,27 @@ describe Player do
   
   describe "#leaderboard" do
     before {
-      game = FactoryGirl.build(:game, :sport => tennis, :winner => player)
+      player = FactoryGirl.create(:player)
+      player2 = FactoryGirl.create(:player)
       
-      FactoryGirl.create(:game, :sport => tennis, :winner => player, :loser => player2)
-      FactoryGirl.create(:game, :sport => tennis, :winner => player, :loser => player2)
-      FactoryGirl.create(:game, :sport => tennis, :winner => player2, :loser => player)
-      
-      FactoryGirl.create(:game, :sport => golf, :winner => player2, :loser => player)
-      FactoryGirl.create(:game, :sport => golf, :winner => player, :loser => player2)
+      FactoryGirl.create(:rank, :player => player, :sport => tennis, :value => 10)
+      FactoryGirl.create(:rank, :player => player, :sport => tennis, :value => 90)
+      FactoryGirl.create(:rank, :player => player2, :sport => tennis, :value => 20)
+      FactoryGirl.create(:rank, :player => player, :sport => golf, :value => 30)
+      FactoryGirl.create(:rank, :player => player2, :sport => golf, :value => 10)
+      FactoryGirl.create(:rank, :player => player2, :sport => golf, :value => 40)
     }
     
     it { 
       leaderboard = Player.leaderboard(tennis)
       leaderboard.length.should == 2
-      leaderboard.first.rank.should == 1000
+      leaderboard.first.value.should == 90
     }
 
     it { 
       leaderboard = Player.leaderboard(golf)
       leaderboard.length.should == 2
-      leaderboard.first.rank.should == 1000
+      leaderboard.first.value.should == 40
     }
   end
   

@@ -1,5 +1,6 @@
 class LeaderboardController < ApplicationController
   def index
-    @leaders = Player.leaderboard
+    @sports = Sport.all() 
+    @leaders = Player.leaderboard(@sports.first)
   end
 end

@@ -8,8 +8,12 @@ class Game < ActiveRecord::Base
   validates_presence_of :winner, message: "Even life has a winner"
   validates_presence_of :loser, message: "Without losers, there can be no winners"
 
-  def default_scope
-    order("games.date_added desc")
+  def self.order_played
+    order('created_at asc')
+  end
+  
+  def self.most_recent
+    order('created_at desc')
   end
 
   def to_s

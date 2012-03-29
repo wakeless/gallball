@@ -13,6 +13,27 @@ describe Game do
   it { should validate_presence_of(:winner).with_message("Even life has a winner") }
   it { should validate_presence_of(:loser).with_message("Without losers, there can be no winners") }
   
+  describe "#order_scopes" do
+    let (:first_game) { FactoryGirl.create(:game) }
+    let (:last_game) { FactoryGirl.create(:game) }
+    before {
+      first_game
+      FactoryGirl.create(:game)
+      FactoryGirl.create(:game)
+      last_game
+    }
+    
+    describe "#order_played" do
+      subject { Game.order_played }
+      it { subject.first.should == first_game } 
+    end
+    
+    describe "#most_recent" do
+      subject { Game.most_recent }
+      it { subject.first.should == last_game }
+    end
+  end
+  
   describe "#player_games" do
     before {
       FactoryGirl.create(:game, :winner => player1, :loser => player2)

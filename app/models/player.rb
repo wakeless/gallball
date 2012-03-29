@@ -1,7 +1,7 @@
 class Player < ActiveRecord::Base
   has_many :wins, class_name:  "Game", foreign_key: :winner_id
   has_many :losses, class_name: "Game", foreign_key: :loser_id
-  has_many :ranks
+  has_many :ranks, :order => 'updated_at desc'
   has_many :games, :finder_sql => Proc.new { "SELECT * FROM games WHERE winner_id = #{id} or loser_id = #{id} ORDER BY created_at desc" }
 
   validates_presence_of :name, message: "People have names, yo"
@@ -24,7 +24,7 @@ class Player < ActiveRecord::Base
   end
 
   def self.leaderboard(sport)
-    select("players.*").joins(:ranks).where("ranks.sport_id = ?", sport)
+    joins(:ranks).merge(Rank.for_sport(sport).current_ranks).order("ranks.value desc").select("players.*, ranks.value")
   end
   
   def games_played
