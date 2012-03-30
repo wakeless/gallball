@@ -3,6 +3,6 @@ class ApplicationController < ActionController::Base
   before_filter :recent_games
 
   def recent_games
-    @recent_games = Game.limit(20)
+    @recent_games = Game.most_recent.limit(20)
   end
 end
