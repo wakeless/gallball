@@ -30,4 +30,14 @@ class Player < ActiveRecord::Base
   def games_played
     games.length
   end
+
+  def wins_hash
+    Hash[wins.group_by(&:loser_id).collect{|g| [g[0], g[1].length]}]
+  end
+
+  def bunny
+    if wins.length > 0 and wins_hash.values.max > (wins.length / 3) and wins_hash.values.max > 10
+      Player.find_by_id(wins_hash.key wins_hash.values.max)
+    end
+  end
 end
