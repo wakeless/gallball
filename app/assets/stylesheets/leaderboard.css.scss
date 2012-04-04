@@ -1,3 +1,20 @@
 // Place all the styles related to the leaderboard controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+#recent_games {
+  li {
+    margin-bottom: 8px;
+
+    span {
+      display: block;
+
+      &.time {
+        font-style: italic;
+        font-size: 12px;
+        line-height: 14px;
+        color: #999;
+      }
+    }
+  }
+}

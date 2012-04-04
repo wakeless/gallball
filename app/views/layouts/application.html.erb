@@ -50,10 +50,13 @@
             </div>
             <div class="span3">
               <div class="well sidebar-nav">
-                <ul class="nav nav-list">
+                <ul class="nav nav-list" id="recent_games">
                   <li class="nav-header">Recent Games</li>
                     <% @recent_games.each do |game| %>
-                      <li><%= game.to_s %></li>
+                      <li>
+                        <span><%= game.to_s %></span>
+                        <span class="time"><%= time_ago_in_words(game.created_at) %> ago</span>
+                      </li>
                     <% end %>
                 </ul>
               </div><!--/.well -->
