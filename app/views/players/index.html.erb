@@ -1,8 +1,11 @@
 <h1>Listing players</h1>
 
-<table>
+<table id="players">
   <tr>
     <th>Name</th>
+    <th>Wins</th>
+    <th>Losses</th>
+    <th>Bunny</th>
     <th></th>
     <th></th>
     <th></th>
@@ -11,6 +14,9 @@
 <% @players.each do |player| %>
   <tr>
     <td><%= player.name %></td>
+    <td><%= player.wins.length %></td>
+    <td><%= player.losses.length %></td>
+    <td><%= player.bunny.name if player.bunny %></td>
     <td><%= link_to 'Show', player %></td>
     <td><%= link_to 'Edit', edit_player_path(player) %></td>
     <td><%= link_to 'Destroy', player, confirm: 'Are you sure?', method: :delete %></td>

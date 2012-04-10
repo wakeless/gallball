@@ -70,6 +70,23 @@ describe Game do
       player2.ranks.first.value.should < 1000
     }
   end
+
+  describe "#update_player_rank_multiple" do
+    it { 
+      sport = FactoryGirl.build(:sport, :name => '9ball')
+
+      player1 = FactoryGirl.create(:player)
+      player2 = FactoryGirl.create(:player)
+
+      (1..100).each do |i|
+        FactoryGirl.build(:game, :sport => sport, :winner => player1, :loser => player2).update_player_rank
+        FactoryGirl.build(:game, :sport => sport, :winner => player2, :loser => player1).update_player_rank
+      end
+
+      player1.ranks.first.value.should > 950 
+      player2.ranks.first.value.should > 950
+    }
+  end
   
   describe "#after_save" do
     it {
