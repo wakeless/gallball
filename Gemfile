@@ -6,7 +6,7 @@ gem "simple_form"
 gem 'twitter-bootstrap-rails', :git => "git://github.com/seyhunak/twitter-bootstrap-rails.git" 
 gem 'jquery-rails'
 
-gem 'elo'
+gem 'elo', git: "https://github.com/wakeless/elo.git", branch: "equal-change"
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
