@@ -33,8 +33,10 @@ class Player < ActiveRecord::Base
     streak_type + streak.to_s
   end
 
-  def update_rank(sport, rank, game = {})
-    rank = self.ranks.build(:sport => sport, :value => rank, :updated_at => game[:updated_at], :created_at => game[:created_at])
+  def update_rank(sport, rank, game = nil)
+    dates = {}
+    dates = { updated_at: game.updated_at, created_at: game.created_at} if game
+    rank = self.ranks.build({:sport => sport, :value => rank}.merge(dates))
     rank.save
   end
 

@@ -4,6 +4,7 @@ class AddRanksToUsers < ActiveRecord::Migration
     
     Rank.delete_all
     Game.order_played.each do |game|
+      say game.inspect
       game.update_player_rank
     end
   end
