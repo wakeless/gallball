@@ -1,9 +1,27 @@
 <h1>Leaderboard</h1>
-<ol>
-<% @leaders.each do |leader| %>
-  <li><%= leader.name %> (rank: <%= leader.value %>, games: <%= leader.games.length %>)</li>
-<% end %>
-</ol>
+
+<table class="table table-striped">
+	<thead>
+		<th>Rank</th>
+		<th>Name</th>
+		<th>Played</th>
+		<th>Wins</th>
+		<th>Losses</th>
+		<th>%</th>
+	</thead>
+	<tbody>
+		<% @leaders.each do |leader| %>
+		<tr>
+			<td><%= leader.value %></td>
+			<td><%= leader.name %></td>
+			<td><%= leader.games.length %></td>
+			<td><%= leader.wins.length %></td>
+			<td><%= leader.losses.length %></td>
+			<td><%= leader.percentage %></td>
+		</tr>
+		<% end %>
+	</tbody>
+</table>
 
 <%= link_to "New Game", new_game_path, :class => "btn btn-primary" %>
 <%= link_to "New Player", new_player_path, :class => "btn btn-primary" %>
