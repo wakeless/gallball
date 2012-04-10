@@ -1,29 +1,26 @@
 <h1>Listing players</h1>
 
-<table id="players">
-  <tr>
-    <th>Name</th>
-    <th>Wins</th>
-    <th>Losses</th>
-    <th>Bunny</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
-
-<% @players.each do |player| %>
-  <tr>
-    <td><%= player.name %></td>
-    <td><%= player.wins.length %></td>
-    <td><%= player.losses.length %></td>
-    <td><%= player.bunny.name if player.bunny %></td>
-    <td><%= link_to 'Show', player %></td>
-    <td><%= link_to 'Edit', edit_player_path(player) %></td>
-    <td><%= link_to 'Destroy', player, confirm: 'Are you sure?', method: :delete %></td>
-  </tr>
-<% end %>
+<table id="players" class="table table-striped">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Wins</th>
+      <th>Losses</th>
+      <th><%= image_tag 'bunny.png' %></th>
+    </tr>
+  </thead>
+  <tbody>
+  <% @players.each do |player| %>
+    <tr>
+      <td><%= link_to player.name, player %></td>
+      <td><%= player.wins.length %></td>
+      <td><%= player.losses.length %></td>
+      <td><%= player.bunny.name if player.bunny %></td>
+    </tr>
+  <% end %>
+  </tbody>
 </table>
 
 <br />
 
-<%= link_to 'New Player', new_player_path %>
+<%= link_to 'New Player', new_player_path, :class => "btn btn-primary" %>
