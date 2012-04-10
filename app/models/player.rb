@@ -34,9 +34,8 @@ class Player < ActiveRecord::Base
   end
 
   def update_rank(sport, rank, game = nil)
-    dates = {}
-    dates = { updated_at: game.updated_at, created_at: game.created_at} if game
-    rank = self.ranks.build({:sport => sport, :value => rank}.merge(dates))
+    rank = self.ranks.build({:sport => sport, :value => rank})
+    rank.update_attributes({ :updated_at => game.updated_at, :created_at => game.created_at }) if game
     rank.save
   end
 
