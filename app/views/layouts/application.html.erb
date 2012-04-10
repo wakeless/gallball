@@ -35,6 +35,7 @@
             <ul class="nav">
                 <li><%= link_to "New Game", new_game_path %></li>
                 <li><%= link_to "Leaderboard", root_path %></li>
+                <li><%= link_to "Players", players_path %></li>
             </ul>
           </div><!--/.nav-collapse -->
         </div>
@@ -49,10 +50,13 @@
             </div>
             <div class="span3">
               <div class="well sidebar-nav">
-                <ul class="nav nav-list">
+                <ul class="nav nav-list" id="recent_games">
                   <li class="nav-header">Recent Games</li>
                     <% @recent_games.each do |game| %>
-                      <li><%= game.to_s %></li>
+                      <li>
+                        <span><%= game.to_s %></span>
+                        <span class="time"><%= time_ago_in_words(game.created_at) %> ago</span>
+                      </li>
                     <% end %>
                 </ul>
               </div><!--/.well -->
