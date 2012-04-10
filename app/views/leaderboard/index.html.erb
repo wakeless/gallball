@@ -8,6 +8,7 @@
 		<th>Wins</th>
 		<th>Losses</th>
 		<th>%</th>
+		<th>Streak</th>
 	</thead>
 	<tbody>
 		<% @leaders.each do |leader| %>
@@ -18,6 +19,7 @@
 			<td><%= leader.wins.length %></td>
 			<td><%= leader.losses.length %></td>
 			<td><%= leader.percentage %></td>
+			<td><%= leader.streak %></td>
 		</tr>
 		<% end %>
 	</tbody>
