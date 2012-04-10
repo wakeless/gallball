@@ -14,13 +14,32 @@ class Player < ActiveRecord::Base
     end
   end
 
+  def streak
+    streak_type = "-"
+    streak = 0
+
+    games.reverse.each do |game|
+      if game.winner == self && streak_type == "-"
+        streak_type = "+"
+        streak = 1
+      elsif game.loser == self && streak_type == "+"
+        streak_type = "-"
+        streak = 1
+      else
+        streak += 1
+      end
+    end
+
+    streak_type + streak.to_s
+  end
+
   def update_rank(sport, rank)
     rank = self.ranks.build(:sport => sport, :value => rank)
     rank.save
   end
 
   def percentage
-    wins.length.to_f / games.length * 100
+    (wins.length.to_f / games.length * 100).round(2)
   end
 
   def self.leaderboard(sport)
