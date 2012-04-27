@@ -1,13 +1,21 @@
 <h1>Listing games</h1>
-<% @games.each do |game| %>
-  <tr>
-    <td><%= game.winner.name %></td>
-    <td><%= game.loser.name %></td>
-    <td><%= link_to 'Show', game %></td>
-    <td><%= link_to 'Edit', edit_game_path(game) %></td>
-    <td><%= link_to 'Destroy', game, confirm: 'Are you sure?', method: :delete %></td>
-  </tr>
-<% end %>
+<table class="table table-striped">
+  <thead>
+    <th>Winner</th>
+    <th>Loser</th>
+    <th>Played</th>
+    <th>&nbsp;</th>
+  </thead>
+  <tbody>
+  <% @games.reverse.each do |game| %>
+    <tr>
+      <td><%= game.winner.name %></td>
+      <td><%= game.loser.name %></td>
+      <td><%= time_ago_in_words(game.created_at) %> ago</td>
+      <td><%= link_to 'Destroy', game, confirm: 'Are you sure?', method: :delete %></td>
+    </tr>
+  <% end %>
+  </tbody>
 </table>
 
 <br />
