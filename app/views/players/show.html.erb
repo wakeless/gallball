@@ -1,9 +1,28 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <b>Name:</b>
-  <%= @player.name %>
-</p>
+<h1><%= @player.name %>'s stats</h1>
+
+<table class="table table-striped">
+  <thead>
+    <th>Name</th>
+    <th>Played</th>
+    <th>Wins</th>
+    <th>Losses</th>
+    <th>%</th>
+  </thead>
+  <tbody>
+    <% @players.each do |player| %>
+    <% next if player == @player %>
+    <tr>
+      <td><%= link_to player.name, player %></td>
+      <td><%= @player.games_against(player).length %></td>
+      <td><%= @player.wins_against(player).length %></td>
+      <td><%= @player.losses_against(player).length %></td>
+      <td><%= @player.percentage_against(player) %></td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>
 
 
 <%= link_to 'Edit', edit_player_path(@player) %> |
