@@ -1,11 +1,13 @@
 class Rank < ActiveRecord::Base
   belongs_to :player
   belongs_to :sport
+  belongs_to :game
 
-  attr_accessible :player_id, :sport_id, :updated_at, :created_at, :value, :sport, :player
+  attr_accessible :player_id, :sport_id, :updated_at, :created_at, :value, :sport, :player, :game
 
   validates_presence_of :player
   validates_presence_of :sport
+  validates_presence_of :game
 
   validates_presence_of :value
   

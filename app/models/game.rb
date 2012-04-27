@@ -4,9 +4,13 @@ class Game < ActiveRecord::Base
   belongs_to :winner, :class_name => "Player"
   belongs_to :loser, :class_name => "Player"
 
+  has_many :ranks, :dependent => :destroy
+
   validates_presence_of :sport, message: "When you play nothing, there is no winner or loser"
   validates_presence_of :winner, message: "Even life has a winner"
   validates_presence_of :loser, message: "Without losers, there can be no winners"
+
+  before_destroy :players_last_game
 
   def self.order_played
     order('created_at asc')
@@ -34,8 +38,16 @@ class Game < ActiveRecord::Base
     
     game = eloWinner.wins_from(eloLoser)
     
-    winner.update_rank(sport, eloWinner.rating)
-    loser.update_rank(sport, eloLoser.rating)
+    winner.update_rank(sport, eloWinner.rating, self)
+    loser.update_rank(sport, eloLoser.rating, self)
+  end
+
+  def players_last_game
+    if winner.games.first == self && loser.games.first == self
+      true
+    else
+      false
+    end
   end
   
   after_save :update_player_rank

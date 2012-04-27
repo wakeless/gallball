@@ -12,7 +12,7 @@
       <td><%= game.winner.name %></td>
       <td><%= game.loser.name %></td>
       <td><%= time_ago_in_words(game.created_at) %> ago</td>
-      <td><%= link_to 'Destroy', game, confirm: 'Are you sure?', method: :delete %></td>
+      <td><%= link_to 'Destroy', game, confirm: 'Are you sure?', method: :delete if game.players_last_game %></td>
     </tr>
   <% end %>
   </tbody>
