@@ -2,6 +2,8 @@ class Rank < ActiveRecord::Base
   belongs_to :player
   belongs_to :sport
 
+  attr_accessible :player_id, :sport_id, :updated_at, :created_at, :value, :sport, :player
+
   validates_presence_of :player
   validates_presence_of :sport
 
