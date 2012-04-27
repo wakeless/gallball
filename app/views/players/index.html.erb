@@ -6,8 +6,9 @@
       <th>Name</th>
       <th>Wins</th>
       <th>Losses</th>
-      <th><%= image_tag 'bunny.png' %></th>
+      <th><a href='#' onclick='$("td.bunny").text(prompt("Bunny gag?")); return false;'><%= image_tag 'bunny.png' %></a></th>
     </tr>
+
   </thead>
   <tbody>
   <% @players.each do |player| %>
@@ -15,7 +16,7 @@
       <td><%= link_to player.name, player %></td>
       <td><%= player.wins.length %></td>
       <td><%= player.losses.length %></td>
-      <td><%= player.bunny.name if player.bunny %></td>
+        <td class='bunny'><%= player.bunny.name if player.bunny %></td>
     </tr>
   <% end %>
   </tbody>
