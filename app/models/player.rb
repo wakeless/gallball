@@ -33,8 +33,8 @@ class Player < ActiveRecord::Base
     streak_type + streak.to_s
   end
 
-  def update_rank(sport, rank, game = nil)
-    rank = self.ranks.build({:sport => sport, :value => rank})
+  def update_rank(sport, rank, game)
+    rank = self.ranks.build({:sport => sport, :value => rank, :game => game})
     rank.save
   end
 
