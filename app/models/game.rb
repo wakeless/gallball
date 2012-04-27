@@ -10,6 +10,8 @@ class Game < ActiveRecord::Base
   validates_presence_of :winner, message: "Even life has a winner"
   validates_presence_of :loser, message: "Without losers, there can be no winners"
 
+  before_destroy :players_last_game
+
   def self.order_played
     order('created_at asc')
   end
@@ -38,6 +40,14 @@ class Game < ActiveRecord::Base
     
     winner.update_rank(sport, eloWinner.rating, self)
     loser.update_rank(sport, eloLoser.rating, self)
+  end
+
+  def players_last_game
+    if winner.games.first == self && loser.games.first == self
+      true
+    else
+      false
+    end
   end
   
   after_save :update_player_rank

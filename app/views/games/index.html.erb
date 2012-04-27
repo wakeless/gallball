@@ -5,7 +5,7 @@
     <td><%= game.loser.name %></td>
     <td><%= link_to 'Show', game %></td>
     <td><%= link_to 'Edit', edit_game_path(game) %></td>
-    <td><%= link_to 'Destroy', game, confirm: 'Are you sure?', method: :delete %></td>
+    <td><%= link_to 'Destroy', game, confirm: 'Are you sure?', method: :delete if game.players_last_game %></td>
   </tr>
 <% end %>
 </table>
