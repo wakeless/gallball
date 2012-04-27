@@ -42,6 +42,22 @@ class Player < ActiveRecord::Base
     (wins.length.to_f / games.length * 100).round(2)
   end
 
+  def games_against(player)
+    wins_against(player) + losses_against(player)
+  end
+
+  def wins_against(player)
+    wins.where(:loser_id => player.id)
+  end
+
+  def losses_against(player)
+    losses.where(:winner_id => player.id)
+  end
+
+  def percentage_against(player)
+    (wins_against(player).length.to_f / games_against(player).length * 100).round(2) if games_against(player).length > 0
+  end
+
   def self.leaderboard(sport)
     joins(:ranks).merge(Rank.for_sport(sport).current_ranks).order("ranks.value desc").select("players.*, ranks.value")
   end
