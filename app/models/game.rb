@@ -51,7 +51,7 @@ class Game < ActiveRecord::Base
   after_create :update_twitter
 
   def update_twitter
-    Twitter.update(to_twitter)
+    Twitter.update(to_twitter) rescue Twitter::Error::Forbidden
   end
 
   def to_twitter
