@@ -1,6 +1,13 @@
 require 'spec_helper'
 
+module Twitter
+end
+
 describe Game do
+  before {
+    Twitter.stub(:update)
+  }
+  
   let (:player1) { FactoryGirl.create(:player, :name => "Player 1") }
   let (:player2) { FactoryGirl.create(:player, :name => "Player 2") }
   let (:player3) { FactoryGirl.create(:player, :name => "Player 2") }
@@ -78,7 +85,7 @@ describe Game do
       player1 = FactoryGirl.create(:player)
       player2 = FactoryGirl.create(:player)
 
-      (1..100).each do |i|
+      (1..50).each do |i|
         FactoryGirl.build(:game, :sport => sport, :winner => player1, :loser => player2).update_player_rank
         FactoryGirl.build(:game, :sport => sport, :winner => player2, :loser => player1).update_player_rank
       end
@@ -99,10 +106,42 @@ describe Game do
       player2.stub(:rank_for_sport).and_return(1000)
       player2.stub(:games_played).and_return(0)
       player2.should_receive(:update_rank)
+
+
         
       game = FactoryGirl.build(:game, :winner => player1, :loser => player2)
+      Twitter.should_receive(:update).with(game.to_twitter)
       game.save
     }
+  end
+
+  describe "#to_twitter" do
+    subject {
+      FactoryGirl.build(:game)
+    }
+    it { subject.to_twitter.should == "#{subject.winner.to_twitter} beat #{subject.loser.to_twitter} at #{subject.sport.to_twitter}" }
+
+  end
+
+  describe "#create" do
+
+    let(:game) { FactoryGirl.create(:game) }
+  end
+
+  describe "#delete" do
+    before {
+      sport = FactoryGirl.create(:sport)
+      player1 = FactoryGirl.create(:player)
+      player2 = FactoryGirl.create(:player)
+      @game = FactoryGirl.create(:game, :sport => sport, :winner => player1, :loser => player2)
+    }
+
+    it {
+      lambda {
+          @game.destroy
+      }.should change(Rank.all, :length).from(2).to(0)
+    }
+
   end
   
    

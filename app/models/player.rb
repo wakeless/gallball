@@ -75,4 +75,8 @@ class Player < ActiveRecord::Base
       Player.find_by_id(wins_hash.key wins_hash.values.max)
     end
   end
+
+  def to_twitter
+    name
+  end
 end

@@ -43,13 +43,19 @@ class Game < ActiveRecord::Base
   end
 
   def players_last_game
-    if winner.games.first == self && loser.games.first == self
-      true
-    else
-      false
-    end
+    winner.games.first == self && loser.games.first == self
   end
   
   after_save :update_player_rank
+
+  after_create :update_twitter
+
+  def update_twitter
+    Twitter.update(to_twitter)
+  end
+
+  def to_twitter
+    "#{winner.to_twitter} beat #{loser.to_twitter} at #{sport.to_twitter}"
+  end
   
 end
