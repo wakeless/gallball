@@ -3,3 +3,7 @@
  *= require_self
  *= require_tree .
 */
+
+.content .btn {
+	margin-bottom: 30px;
+}

@@ -5,20 +5,19 @@
 		<th>Rank</th>
 		<th>Name</th>
 		<th>Played</th>
-		<th>Wins</th>
-		<th>Losses</th>
-		<th>%</th>
+		<th class="noiphone">Wins</th>
+		<th class="noiphone">Losses</th>
+		<th class="noiphone">%</th>
 		<th>Streak</th>
 	</thead>
 	<tbody>
 		<% @leaders.each do |leader| %>
 		<tr>
 			<td><%= leader.value %></td>
-			<td><%= leader.name %></td>
 			<td><%= leader.games.length %></td>
-			<td><%= leader.wins.length %></td>
-			<td><%= leader.losses.length %></td>
-			<td><%= leader.percentage %></td>
+			<td class="noiphone"><%= leader.wins.length %></td>
+			<td class="noiphone"><%= leader.losses.length %></td>
+			<td class="noiphone"><%= leader.percentage %></td>
 			<td><%= leader.streak %></td>
 		</tr>
 		<% end %>
