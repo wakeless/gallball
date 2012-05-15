@@ -18,3 +18,9 @@
     }
   }
 }
+
+@media only screen and (max-width : 480px) {
+  .wins, .losses, .percentage {
+    display: none;
+  }
+}

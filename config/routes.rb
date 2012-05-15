@@ -5,7 +5,7 @@ Gallball::Application.routes.draw do
 
   resources :players
 
-  match "/leaderboard" => "leaderboard#index"
+  match "/leaderboard/(:id)" => "leaderboard#index", :as => 'leaderboard'
   root :to => "leaderboard#index"
 
 

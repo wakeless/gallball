@@ -1,24 +1,24 @@
-<h1>Leaderboard</h1>
+<h1>Leaderboard for <%= @sport.name %></h1>
 
 <table class="table table-striped">
 	<thead>
 		<th>Rank</th>
 		<th>Name</th>
 		<th>Played</th>
-		<th>Wins</th>
-		<th>Losses</th>
-		<th>%</th>
+		<th class="wins">Wins</th>
+		<th class="losses">Losses</th>
+		<th class="percentage">%</th>
 		<th>Streak</th>
 	</thead>
 	<tbody>
 		<% @leaders.each do |leader| %>
 		<tr>
 			<td><%= leader.value %></td>
-			<td><%= leader.name %></td>
+			<td><%= link_to leader.name, leader %></td>
 			<td><%= leader.games.length %></td>
-			<td><%= leader.wins.length %></td>
-			<td><%= leader.losses.length %></td>
-			<td><%= leader.percentage %></td>
+			<td class="wins"><%= leader.wins.length %></td>
+			<td class="losses"><%= leader.losses.length %></td>
+			<td class="percentage"><%= leader.percentage %></td>
 			<td><%= leader.streak %></td>
 		</tr>
 		<% end %>
