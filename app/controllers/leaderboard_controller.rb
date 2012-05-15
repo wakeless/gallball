@@ -1,6 +1,7 @@
 class LeaderboardController < ApplicationController
   def index
-    @sports = Sport.all() 
-    @leaders = Player.leaderboard(@sports.first)
+    @sport = params[:id] ? Sport.find(params[:id]) : @sport = Sport.all.first
+
+    @leaders = Player.leaderboard(@sport)
   end
 end

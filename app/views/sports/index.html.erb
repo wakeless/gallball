@@ -1,23 +1,23 @@
 <h1>Listing sports</h1>
 
-<table>
+<table id="sports" class="table table-striped">
+  <thead>
   <tr>
     <th>Name</th>
-    <th></th>
-    <th></th>
-    <th></th>
+    <th>Actions</th>
   </tr>
+  </thead>
+  <tbody>
 
 <% @sports.each do |sport| %>
   <tr>
-    <td><%= sport.name %></td>
-    <td><%= link_to 'Show', sport %></td>
+    <td><%= link_to sport.name, leaderboard_path(sport)  %></td>
     <td><%= link_to 'Edit', edit_sport_path(sport) %></td>
-    <td><%= link_to 'Destroy', sport, confirm: 'Are you sure?', method: :delete %></td>
   </tr>
 <% end %>
+</tbody>
 </table>
 
 <br />
 
-<%= link_to 'New Sport', new_sport_path %>
+<%= link_to 'New Sport', new_sport_path, :class => "btn btn-primary"  %>
