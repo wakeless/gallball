@@ -5,9 +5,9 @@
 		<th>Rank</th>
 		<th>Name</th>
 		<th>Played</th>
-		<th class="noiphone">Wins</th>
-		<th class="noiphone">Losses</th>
-		<th class="noiphone">%</th>
+		<th class="wins">Wins</th>
+		<th class="losses">Losses</th>
+		<th class="percentage">%</th>
 		<th>Streak</th>
 	</thead>
 	<tbody>
@@ -16,9 +16,9 @@
 			<td><%= leader.value %></td>
 			<td><%= link_to leader.name, leader %></td>
 			<td><%= leader.games.length %></td>
-			<td class="noiphone"><%= leader.wins.length %></td>
-			<td class="noiphone"><%= leader.losses.length %></td>
-			<td class="noiphone"><%= leader.percentage %></td>
+			<td class="wins"><%= leader.wins.length %></td>
+			<td class="losses"><%= leader.losses.length %></td>
+			<td class="percentage"><%= leader.percentage %></td>
 			<td><%= leader.streak %></td>
 		</tr>
 		<% end %>
