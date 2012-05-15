@@ -14,6 +14,7 @@
 		<% @leaders.each do |leader| %>
 		<tr>
 			<td><%= leader.value %></td>
+			<td><%= link_to leader.name, leader %></td>
 			<td><%= leader.games.length %></td>
 			<td class="noiphone"><%= leader.wins.length %></td>
 			<td class="noiphone"><%= leader.losses.length %></td>
