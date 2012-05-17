@@ -30,11 +30,12 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </a>
-          <%= link_to "Gallball", leaderboard_path, class: "brand" %>
+          <%= link_to "Gallball", root_path, class: "brand" %>
           <div class="container nav-collapse">
             <ul class="nav">
                 <li><%= link_to "New Game", new_game_path %></li>
-                <li><%= link_to "Leaderboard", root_path %></li>
+                <li><%= link_to "Leaderboard", leaderboard_path %></li>
+                <li><%= link_to "Sports", sports_path %></li>
                 <li><%= link_to "Players", players_path %></li>
             </ul>
           </div><!--/.nav-collapse -->
