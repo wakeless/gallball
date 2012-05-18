@@ -60,7 +60,7 @@ class Game < ActiveRecord::Base
 
   def self.by_player_week_day
     
-    select("player_id, count(player_id) as cnt, strftime('%w', created_at)").from("(select distinct winner_id as player_id, id, created_at from games union select distinct loser_id as player_id, id, created_at from games)").group("player_id, strftime('%w', created_at)").order("strftime('%w', created_at)")
+    select("player_id, count(player_id) as cnt, strftime('%w', created_at)").from("(select distinct winner_id as player_id, id, created_at from games union select distinct loser_id as player_id, id, created_at from games) agg").group("player_id, strftime('%w', created_at)").order("strftime('%w', created_at)")
     #select("winner_id, loser_id, strftime('%w', created_at) as day, count(*) as cnt").group("winner_id, loser_id, strftime('%w', created_at)")
   end
 
