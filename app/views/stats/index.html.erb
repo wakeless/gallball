@@ -1,0 +1,132 @@
+<script src="http://code.highcharts.com/highcharts.js"></script>
+<script src="http://code.highcharts.com/modules/exporting.js"></script>
+
+<div id="container" style="min-width: 400px; height: 400px; margin: 0 auto"></div>
+
+  
+<script type='text/javascript'>
+jQuery(function ($) {
+    var chart;
+
+    $(document).ready(function() {
+
+        chart = new Highcharts.Chart({
+
+            chart: {
+
+                renderTo: 'container',
+
+                type: 'column'
+
+            },
+
+            title: {
+
+                text: 'Games Played Per Week'
+
+            },
+
+            xAxis: {
+
+                categories: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']
+
+            },
+
+            yAxis: {
+
+                min: 0,
+
+                title: {
+
+                    text: 'Games per day'
+
+                },
+
+                stackLabels: {
+
+                    enabled: true,
+
+                    style: {
+
+                        fontWeight: 'bold',
+
+                        color: (Highcharts.theme && Highcharts.theme.textColor) || 'gray'
+
+                    }
+
+                }
+
+            },
+
+            legend: {
+
+                align: 'right',
+
+                x: -100,
+
+                verticalAlign: 'top',
+
+                y: 20,
+
+                floating: true,
+
+                backgroundColor: (Highcharts.theme && Highcharts.theme.legendBackgroundColorSolid) || 'white',
+
+                borderColor: '#CCC',
+
+                borderWidth: 1,
+
+                shadow: false
+
+            },
+
+            tooltip: {
+
+                formatter: function() {
+
+                    return '<b>'+ this.x +'</b><br/>'+
+
+                        this.series.name +': '+ this.y +'<br/>'+
+
+                        'Total: '+ this.point.stackTotal;
+
+                }
+
+            },
+
+            plotOptions: {
+
+                column: {
+
+                    stacking: 'normal',
+
+                    dataLabels: {
+
+                        enabled: true,
+
+                        color: (Highcharts.theme && Highcharts.theme.dataLabelsColor) || 'white'
+
+                    }
+
+                }
+
+            },
+
+            series: [
+              <% @stats.group_by { |i| i.player_id }.each do |id, obj| %>
+                { name: '<%= Player.find_by_id(id).to_twitter %>', data : [
+                <%= obj.map { |cnt| cnt.cnt }.join(",") %>]
+                },
+              <% end %>
+
+            {}]
+
+        });
+
+    });
+
+    
+});
+
+</script>
+
