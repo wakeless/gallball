@@ -38,6 +38,12 @@ class Player < ActiveRecord::Base
     rank.save
   end
 
+  def self.active
+    query = "(select max(created_at) from games where games.winner_id = players.id or games.loser_id = players.id) "
+
+    select("#{query} as last_game").where("#{query} > ?", 14.days.ago)
+  end
+
   def percentage
     (wins.length.to_f / games.length * 100).round(2)
   end
@@ -59,7 +65,7 @@ class Player < ActiveRecord::Base
   end
 
   def self.leaderboard(sport)
-    joins(:ranks).merge(Rank.for_sport(sport).current_ranks).order("ranks.value desc").select("players.*, ranks.value")
+    active.joins(:ranks).merge(Rank.for_sport(sport).current_ranks).order("ranks.value desc").select("players.*, ranks.value")
   end
   
   def games_played
