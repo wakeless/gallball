@@ -17,3 +17,36 @@ body { padding-top: 60px; }
 //
 // Example:
 // @linkColor: #ff0000;
+
+.modal#new_game_modal {
+	display: none;
+	width: 250px;
+	margin-left: -125px;
+	overflow: visible;
+	border: 1px solid rgba(0, 0, 0, 0.1)
+}
+
+.modal#new_game_modal .modal-body {
+	overflow: visible;
+}
+
+.modal#new_game_modal form {
+	margin-bottom: 0;
+}
+
+/* cheekily hide primary submit button, but don't use display none otherwise enter won't submit the form */
+.modal#new_game_modal form .btn-primary {
+	float: right;
+	opacity: 0;
+	height: 0;
+}
+
+.modal-backdrop, .modal-backdrop.fade.in {
+	opacity: 1;
+	background: -moz-radial-gradient(center, ellipse cover,  rgba(0,0,0,0) 0%, rgba(0,0,0,0.65) 100%);
+	background: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(0%,rgba(0,0,0,0)), color-stop(100%,rgba(0,0,0,0.65)));
+	background: -webkit-radial-gradient(center, ellipse cover,  rgba(0,0,0,0) 0%,rgba(0,0,0,0.65) 100%);
+	background: -o-radial-gradient(center, ellipse cover,  rgba(0,0,0,0) 0%,rgba(0,0,0,0.65) 100%);
+	background: -ms-radial-gradient(center, ellipse cover,  rgba(0,0,0,0) 0%,rgba(0,0,0,0.65) 100%);
+	background: radial-gradient(center, ellipse cover,  rgba(0,0,0,0) 0%,rgba(0,0,0,0.65) 100%);
+}
