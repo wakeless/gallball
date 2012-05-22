@@ -34,7 +34,7 @@
           <%= link_to "Gallball", root_path, class: "brand" %>
           <div class="container nav-collapse">
             <ul class="nav">
-                <li><a href="#new_game_modal" data-toggle="modal">New Game</a></li>
+                <li><%= link_to "New Game", new_game_path, :id => 'new_game_anchor' %></li>
                 <li><%= link_to "Leaderboard", leaderboard_path %></li>
                 <li><%= link_to "Sports", sports_path %></li>
                 <li><%= link_to "Players", players_path %></li>
