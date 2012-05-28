@@ -16,7 +16,7 @@
       <td><%= link_to player.name, player %></td>
       <td><%= player.wins.length %></td>
       <td><%= player.losses.length %></td>
-        <td class='bunny'><%= player.bunny.name if player.bunny %></td>
+      <td class='bunny'><%= bunnies(player) %></td>
     </tr>
   <% end %>
   </tbody>

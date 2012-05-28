@@ -72,6 +72,14 @@ class Player < ActiveRecord::Base
     games.length
   end
 
+  def boss
+    Player.all.find_all{|p| p if losses_against(p).length >= 10 && percentage_against(p) <= 35}.sort{|x,y| percentage_against(x) <=> percentage_against(y)}.first
+  end
+
+  def bunnies
+    Player.all.find_all{|p| p if p.boss && p.boss.id == id}
+  end
+
   def wins_hash
     Hash[wins.group_by(&:loser_id).collect{|g| [g[0], g[1].length]}]
   end
