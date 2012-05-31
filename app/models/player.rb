@@ -3,6 +3,7 @@ class Player < ActiveRecord::Base
   has_many :losses, class_name: "Game", foreign_key: :loser_id
   has_many :ranks, :order => 'updated_at desc'
   has_many :games, :finder_sql => Proc.new { "SELECT * FROM games WHERE winner_id = #{id} or loser_id = #{id} ORDER BY created_at desc" }
+  has_one :boss, class_name: "Player", foreign_key: :id
 
   validates_presence_of :name, message: "People have names, yo"
 
@@ -72,12 +73,13 @@ class Player < ActiveRecord::Base
     games.length
   end
 
-  def boss
-    Player.all.find_all{|p| p if losses_against(p).length >= 10 && percentage_against(p) <= 35}.sort{|x,y| percentage_against(x) <=> percentage_against(y)}.first
+  def update_boss
+    boss = Player.all.find_all{|p| p if losses_against(p).length >= 10 && percentage_against(p) <= 35}.sort{|x,y| percentage_against(x) <=> percentage_against(y)}.first
+    self.save
   end
 
   def bunnies
-    Player.all.find_all{|p| p if p.boss && p.boss.id == id}
+    Player.where(:boss_id => self.id)
   end
 
   def wins_hash

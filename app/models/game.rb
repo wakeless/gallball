@@ -42,11 +42,18 @@ class Game < ActiveRecord::Base
     loser.update_rank(sport, eloLoser.rating, self)
   end
 
+  def update_player_boss
+    winner.update_boss
+    loser.update_boss
+  end
+
   def players_last_game
     winner.games.first == self && loser.games.first == self
   end
   
   after_save :update_player_rank
+
+  after_save :update_player_boss
 
   after_create :update_twitter
 
